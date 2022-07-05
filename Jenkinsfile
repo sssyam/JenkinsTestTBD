@@ -20,7 +20,7 @@ pipeline{
                 echo "Testing the application"
                 sh '''
                     curl localhost
-                    if [ "x$?" -eq "x0" ]
+                    if [ "x$?" == "x0" ]
                     then 
                         echo "test worked" 
                     else

@@ -4,18 +4,24 @@ pipeline{
         stage ("build"){
             steps{
                 echo "Building the application"
-            }
-        }
-
-        stage ("test"){
-            steps{
-                echo "Building the application"
+                sh "docker-compose build"
             }
         }
 
         stage ("deploy"){
             steps{
-                echo "Building the application"
+                echo "Deploy the application"
+                sh "docker-compose up --build &"
+            }
+        }
+
+        stage ("test"){
+            steps{
+                echo "Testing the application"
+                sh """
+                    curl localhost
+                    $? -eq 0 && echo "test worked" || echo "test failed"
+                """
             }
         }
     }

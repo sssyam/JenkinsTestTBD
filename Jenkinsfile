@@ -18,10 +18,10 @@ pipeline{
         stage ("test"){
             steps{
                 echo "Testing the application"
-                sh """
+                sh '''
                     curl localhost
                     $? -eq 0 && echo "test worked" || echo "test failed"
-                """
+                '''
             }
         }
     }

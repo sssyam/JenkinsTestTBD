@@ -26,8 +26,10 @@ pipeline{
         }
 
         stage ("clean"){
-            echo "cleaning up"
-            sh "docker compose down"
+            steps{
+                echo "cleaning up"
+                sh "docker compose down"
+            }
         }
     }
 }

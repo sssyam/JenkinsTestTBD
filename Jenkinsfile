@@ -4,14 +4,14 @@ pipeline{
         stage ("build"){
             steps{
                 echo "Building the application"
-                sh "docker-compose build"
+                sh "docker compose build"
             }
         }
 
         stage ("deploy"){
             steps{
                 echo "Deploy the application"
-                sh "docker-compose up --build &"
+                sh "docker compose up -d"
             }
         }
 
@@ -20,9 +20,14 @@ pipeline{
                 echo "Testing the application"
                 sh '''
                     curl localhost
-                    $? -eq 0 && echo "test worked" || echo "test failed"
+                    "x$?" -eq "x0" && echo "test worked" || echo "test failed"
                 '''
             }
+        }
+
+        stage ("clean"){
+            echo "cleaning up"
+            sh "docker compose down"
         }
     }
 }

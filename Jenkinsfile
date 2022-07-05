@@ -20,3 +20,7 @@ pipeline{
         }
     }
 }
+
+node{
+    // Groovy script
+}
